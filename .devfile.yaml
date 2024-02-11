@@ -1,11 +1,14 @@
 schemaVersion: 2.2.0
 metadata:
-  name: delivery-service-jhipster
+  name: delivery-service-dev
+  version: 1.0.0
 projects:
   - name: delivery-service
-    source:
-      location: 'https://github.com/maximilianoPizarro/delivery-service.git'
-      type: github
+    git:
+      remotes:
+        origin: 'https://github.com/maximilianoPizarro/delivery-service.git'
+      checkoutFrom:
+        revision: main
 components:
   - id: redhat/java11/latest
     preferences:
