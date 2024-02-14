@@ -23,7 +23,7 @@ components:
   - name: npm
     volume:
       size:1Gi  
-  - name: delivery-service-dev
+  - alias: maven
     container:  
       image: 'quay.io/maximilianopizarro/codeready-jhipster@sha256:cff26c55fda6d79b75570f012161a0aad771b0052b63db97d9aab26d806fa6ad'
       mountSources: true
