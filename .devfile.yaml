@@ -3,7 +3,7 @@ metadata:
   name: delivery-service-dev
   version: 2.2.2
 projects:
-  - name: delivery-service
+  - name: delivery-service-dev
     git:
       remotes:
         origin: 'https://github.com/maximilianoPizarro/delivery-service.git'
@@ -19,7 +19,7 @@ components:
   - name: npm
     volume:
       size:1Gi  
-  - name: maven
+  - name: delivery-service-dev
     container:  
       image: 'quay.io/maximilianopizarro/codeready-jhipster@sha256:cff26c55fda6d79b75570f012161a0aad771b0052b63db97d9aab26d806fa6ad'
       mountSources: true
