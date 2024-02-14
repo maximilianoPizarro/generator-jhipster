@@ -10,6 +10,15 @@ projects:
       checkoutFrom:
         revision: main
 components:
+  - name: m2
+    volume:
+      size: 1Gi          
+  - name: config
+    volume:
+      size: 512Mi
+  - name: npm
+    volume:
+      size:1Gi  
   - name: maven
     container:  
       image: 'quay.io/maximilianopizarro/codeready-jhipster@sha256:cff26c55fda6d79b75570f012161a0aad771b0052b63db97d9aab26d806fa6ad'
@@ -26,16 +35,7 @@ components:
         - value: '-XX:MaxRAMPercentage=50.0 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/jboss'
           name: JAVA_OPTS
         - value: $(JAVA_OPTS)
-          name: MAVEN_OPTS
-  - name: m2
-    volume:
-      size: 1Gi          
-  - name: config
-    volume:
-      size: 512Mi
-  - name: npm
-    volume:
-      size:1Gi      
+          name: MAVEN_OPTS   
 commands:
   - name: 1. Build
     actions:
