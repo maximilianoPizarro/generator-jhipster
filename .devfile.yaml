@@ -1,7 +1,7 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.2.2
 metadata:
   name: delivery-service-dev
-  version: 2.2.0
+  version: 2.2.2
 projects:
   - name: delivery-service
     git:
