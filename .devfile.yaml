@@ -1,7 +1,7 @@
 schemaVersion: 2.2.0
 metadata:
   name: delivery-service-dev
-  version: 1.0.0
+  version: 2.2.0
 projects:
   - name: delivery-service
     git:
@@ -10,32 +10,32 @@ projects:
       checkoutFrom:
         revision: main
 components:
-  - id: redhat/java11/latest
-    preferences:
-      java.server.launchMode: Standard
-    type: chePlugin
-  - id: redhat/dependency-analytics/latest
-    type: chePlugin
-  - mountSources: true
-    endpoints:
-      - name: health-checks-endpoint
-        port: 8080
-    memoryLimit: 1024Mi
-    type: dockerimage
-    volumes:
-      - name: m2
-        containerPath: /home/jboss/.m2
-      - name: config
-        containerPath: /home/jboss/.config
-      - name: npm
-        containerPath: /home/jboss/.npm
-    alias: maven
-    image: 'quay.io/maximilianopizarro/codeready-jhipster@sha256:cff26c55fda6d79b75570f012161a0aad771b0052b63db97d9aab26d806fa6ad'
-    env:
-      - value: '-XX:MaxRAMPercentage=50.0 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/jboss'
-        name: JAVA_OPTS
-      - value: $(JAVA_OPTS)
-        name: MAVEN_OPTS
+  - name: maven
+    container:  
+      image: 'quay.io/maximilianopizarro/codeready-jhipster@sha256:cff26c55fda6d79b75570f012161a0aad771b0052b63db97d9aab26d806fa6ad'
+      mountSources: true
+      memoryLimit: 1024Mi
+      volumeMounts:
+        - name: m2
+          containerPath: /home/jboss/.m2
+        - name: config
+          containerPath: /home/jboss/.config
+        - name: npm
+          containerPath: /home/jboss/.npm
+      env:
+        - value: '-XX:MaxRAMPercentage=50.0 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/jboss'
+          name: JAVA_OPTS
+        - value: $(JAVA_OPTS)
+          name: MAVEN_OPTS
+  - name: m2
+    volume:
+      size: 1Gi          
+  - name: config
+    volume:
+      size: 512Mi
+  - name: npm
+    volume:
+      size:1Gi      
 commands:
   - name: 1. Build
     actions:
